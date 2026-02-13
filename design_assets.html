@@ -91,6 +91,7 @@
             font-weight: 700;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: -1px;
         }
@@ -282,11 +283,39 @@
     <div class="instructions">
         <h1>HOSH Store Asset Generator</h1>
         <p>Since the automated image generator is at capacity, I've designed these premium tiles using HTML/CSS.</p>
+        <p><strong>To Solve the 'Could not decode image' error:</strong> Download the 128x128 Icon below as a PNG and
+            save it as <code>icon.png</code> in the <code>icons/</code> folder. Then update <code>manifest.json</code>
+            to use the PNG file.</p>
         <p><strong>To Save:</strong> Right-click on each tile, choose <strong>"Inspect"</strong>, then press
             <code>Ctrl+Shift+P</code> (Windows/Linux) or <code>Cmd+Shift+P</code> (Mac), type <strong>"Capture node
                 screenshot"</strong> and hit enter.
         </p>
-        <p>This will save a pixel-perfect image with the exact required dimensions.</p>
+        <p>Alternatively, use the <strong>Download</strong> buttons below which use <code>html2canvas</code>.</p>
+    </div>
+
+    <!-- EXTENSION ICON (128x128) -->
+    <div class="asset-container">
+        <div class="label">Main Extension Icon <span class="dimension">128 x 128</span></div>
+        <button class="download-btn" onclick="downloadTile('main-icon', 'icon.png')">
+            <span>📥</span> Download icon.png
+        </button>
+        <div id="main-icon" class="tile"
+            style="width: 128px; height: 128px; display: flex; align-items: center; justify-content: center; border-radius: 34px;">
+            <svg class="hosh-icon-svg" viewBox="0 0 128 128" style="width: 100px; height: 100px;">
+                <defs>
+                    <linearGradient id="cyberGradIcon" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3B82F6" />
+                        <stop offset="100%" style="stop-color:#8B5CF6" />
+                    </linearGradient>
+                </defs>
+                <g>
+                    <rect x="35" y="30" width="14" height="68" rx="7" fill="url(#cyberGradIcon)" />
+                    <rect x="79" y="30" width="14" height="68" rx="7" fill="url(#cyberGradIcon)" />
+                    <rect x="35" y="57" width="58" height="14" rx="7" fill="url(#cyberGradIcon)" />
+                </g>
+                <circle cx="64" cy="64" r="3" fill="white" />
+            </svg>
+        </div>
     </div>
 
     <!-- SMALL PROMO TILE -->
