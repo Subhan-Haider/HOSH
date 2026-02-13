@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOSH Store Assets Design Board</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0F172A;
+            --cobalt-deep: #1E293B;
+            --accent-blue: #3B82F6;
+            --accent-purple: #8B5CF6;
+            --text-main: #F8FAFC;
+        }
+
+        body {
+            background-color: #020617;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            gap: 60px;
+        }
+
+        .instructions {
+            max-width: 800px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .asset-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .label {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .dimension {
+            font-size: 0.9rem;
+            opacity: 0.6;
+        }
+
+        /* Common Tile Styles */
+        .tile {
+            background-color: var(--bg-dark);
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            /* Chrome store tiles have slight rounded corners or square */
+            font-family: 'Outfit', sans-serif;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Abstract Background Elements */
+        .glow-sphere {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 1;
+        }
+
+        .hosh-logo {
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hosh-icon-svg {
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.5));
+        }
+
+        .brand-name {
+            font-size: 4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        /* --- Small Promo Tile (440x280) --- */
+        #small-promo {
+            width: 440px;
+            height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #small-promo .glow-1 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-blue);
+            top: -50px;
+            right: -50px;
+            opacity: 0.3;
+        }
+
+        #small-promo .glow-2 {
+            width: 150px;
+            height: 150px;
+            background: var(--accent-purple);
+            bottom: -30px;
+            left: -30px;
+            opacity: 0.2;
+        }
+
+        #small-promo .brand-name {
+            font-size: 3.5rem;
+        }
+
+        #small-promo .tagline {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- Marquee Promo Tile (1400x560) --- */
+        #marquee-promo {
+            width: 1400px;
+            height: 560px;
+            display: flex;
+            align-items: center;
+            padding: 0 80px;
+        }
+
+        #marquee-promo .glow-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-blue);
+            top: -100px;
+            left: 20%;
+            opacity: 0.15;
+        }
+
+        #marquee-promo .glow-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--accent-purple);
+            bottom: -50px;
+            right: 15%;
+            opacity: 0.1;
+        }
+
+        #marquee-promo .content-left {
+            z-index: 10;
+            flex: 1;
+        }
+
+        #marquee-promo .brand-group {
+            margin-bottom: 20px;
+        }
+
+        #marquee-promo .brand-name {
+            font-size: 8rem;
+            line-height: 1;
+        }
+
+        #marquee-promo .main-title {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        #marquee-promo .feature-list {
+            display: flex;
+            gap: 30px;
+        }
+
+        #marquee-promo .feature-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #marquee-promo .feature-icon {
+            color: var(--accent-blue);
+        }
+
+        #marquee-promo .hero-image {
+            z-index: 10;
+            width: 500px;
+            height: 350px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        /* Mock UI elements inside hero */
+        #marquee-promo .mock-ui-node {
+            background: #0F172A;
+            height: 100%;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #marquee-promo .mock-line {
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        #marquee-promo .mock-solve-btn {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .download-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid var(--accent-blue);
+            color: var(--accent-blue);
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-blue);
+            color: white;
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .download-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+</head>
+
+<body>
+
+    <div class="instructions">
+        <h1>HOSH Store Asset Generator</h1>
+        <p>Since the automated image generator is at capacity, I've designed these premium tiles using HTML/CSS.</p>
+        <p><strong>To Save:</strong> Right-click on each tile, choose <strong>"Inspect"</strong>, then press
+            <code>Ctrl+Shift+P</code> (Windows/Linux) or <code>Cmd+Shift+P</code> (Mac), type <strong>"Capture node
+                screenshot"</strong> and hit enter.
+        </p>
+        <p>This will save a pixel-perfect image with the exact required dimensions.</p>
+    </div>
+
+    <!-- SMALL PROMO TILE -->
+    <div class="asset-container">
+        <div class="label">Small Promo Tile <span class="dimension">440 x 280</span></div>
+        <button class="download-btn" onclick="downloadTile('small-promo', 'HOSH_Small_Promo.png')">
+            <span>📥</span> Download Small Promo
+        </button>
+        <div id="small-promo" class="tile">
+            <div class="glow-sphere glow-1"></div>
+            <div class="glow-sphere glow-2"></div>
+
+            <svg class="hosh-icon-svg" viewBox="0 0 128 128">
+                <defs>
+                    <linearGradient id="cyberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3B82F6" />
+                        <stop offset="100%" style="stop-color:#8B5CF6" />
+                    </linearGradient>
+                </defs>
+                <g>
+                    <rect x="35" y="30" width="14" height="68" rx="7" fill="url(#cyberGrad)" />
+                    <rect x="79" y="30" width="14" height="68" rx="7" fill="url(#cyberGrad)" />
+                    <rect x="35" y="57" width="58" height="14" rx="7" fill="url(#cyberGrad)" />
+                </g>
+                <circle cx="64" cy="64" r="3" fill="white" />
+            </svg>
+
+            <div class="brand-name">HOSH</div>
+            <div class="tagline">Neural Canvas Assistant</div>
+        </div>
+    </div>
+
+    <!-- MARQUEE PROMO TILE -->
+    <div class="asset-container">
+        <div class="label">Marquee Promo Tile <span class="dimension">1400 x 560</span></div>
+        <button class="download-btn" onclick="downloadTile('marquee-promo', 'HOSH_Marquee_Promo.png')">
+            <span>📥</span> Download Marquee Promo
+        </button>
+        <div id="marquee-promo" class="tile">
+            <div class="glow-sphere glow-1"></div>
+            <div class="glow-sphere glow-2"></div>
+
+            <div class="content-left">
+                <div class="brand-group">
+                    <div class="brand-name">HOSH</div>
+                    <div class="main-title">The Elite AI Assistant for Canvas</div>
+                </div>
+
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <span class="feature-icon">⚡</span> Neural Solver
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🪄</span> Auto-Fill Protocol
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🛡️</span> Privacy-First
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-image">
+                <div class="mock-ui-node">
+                    <div class="mock-line" style="width: 40%; background: #3B82F6;"></div>
+                    <div class="mock-line" style="width: 90%;"></div>
+                    <div class="mock-line" style="width: 80%;"></div>
+                    <div class="mock-line" style="width: 85%;"></div>
+                    <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
+                        <div class="mock-line"
+                            style="width: 30%; height: 20px; border-radius: 4px; background: rgba(59,130,246,0.2);">
+                        </div>
+                        <div class="mock-line" style="width: 100%; height: 12px;"></div>
+                        <div class="mock-line" style="width: 100%; height: 12px;"></div>
+                    </div>
+                    <div class="mock-solve-btn" style="margin-top: auto;">Solve & Fill with HOSH</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function downloadTile(id, filename) {
+            const element = document.getElementById(id);
+            const btn = event.currentTarget;
+            const originalText = btn.innerHTML;
+
+            btn.innerHTML = "<span>⏳</span> Generating...";
+            btn.style.opacity = "0.7";
+            btn.disabled = true;
+
+            try {
+                const canvas = await html2canvas(element, {
+                    scale: 2, // Use 2x scale for high resolution
+                    backgroundColor: null,
+                    logging: false,
+                    useCORS: true
+                });
+
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } catch (err) {
+                console.error("Download failed:", err);
+                alert("Failed to generate image. Please try the manual 'Capture node screenshot' method.");
+            } finally {
+                btn.innerHTML = originalText;
+                btn.style.opacity = "1";
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOSH Dark</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+  <div class="container">
+    <!-- Setup -->
+    <div id="setup-view" class="setup-view hidden">
+      <h2 style="margin-bottom: 8px;">HOSH Neural</h2>
+      <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 24px;">Select your processing core to
+        continue.</p>
+
+      <div id="provider-choice" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+        <button id="use-builtin" class="primary-btn"
+          style="background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);">Use Built-in AI
+          (Free)</button>
+        <div style="display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.7rem;">
+          <div style="flex: 1; height: 1px; background: var(--border);"></div>
+          OR
+          <div style="flex: 1; height: 1px; background: var(--border);"></div>
+        </div>
+        <button id="show-key-input" class="primary-btn"
+          style="background: var(--panel); border: 1px solid var(--border);">Use Custom API Key</button>
+      </div>
+
+      <div id="key-input-area" class="hidden">
+        <input type="password" id="api-key" class="setup-input" placeholder="Enter OpenRouter Key">
+        <button id="save-key" class="primary-btn">Activate Custom Core</button>
+      </div>
+
+      <button id="cancel-setup" class="hidden"
+        style="margin-top: 16px; background: transparent; color: var(--text-muted); border: none; font-size: 0.8rem; cursor: pointer; text-decoration: underline;">Wait,
+        take me back</button>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <img src="icons/icon.svg" width="32" height="32" alt="HOSH">
+        <h1>HOSH</h1>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div class="status-pill">Connected</div>
+        <button id="settings-btn" class="icon-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path
+              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+            </path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Chat History -->
+    <div class="view" id="chat-history">
+      <div class="msg ai">Ready. Scanning page data...</div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="meta">
+        <span id="page-title">Detecting...</span>
+        <label class="auto-solve-wrap">
+          <span>AUTO-SOLVE</span>
+          <input type="checkbox" id="auto-solve-toggle" style="display: none;">
+          <div class="toggle-switch"></div>
+        </label>
+      </div>
+
+      <div class="input-container" id="chat-view">
+        <textarea id="user-input" placeholder="Query current page..."></textarea>
+        <button id="send-btn" class="icon-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+
+      <button id="analyze-page" class="primary-btn">Solve Quiz Data</button>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
